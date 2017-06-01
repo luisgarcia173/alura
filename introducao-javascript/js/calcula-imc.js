@@ -11,7 +11,14 @@
         if(confirm("Deseja remover este paciente?")){
             var alvoEvento = event.target;
             var paiDoAlvo = alvoEvento.parentNode;
-            paiDoAlvo.remove();
+
+            // Adicionando animação
+            paiDoAlvo.classList.add("fadeOut");
+
+            // Timeout para dar tempo executar animação
+            setTimeout(function() {
+                paiDoAlvo.remove();
+            }, 500);
         }
     });
 
