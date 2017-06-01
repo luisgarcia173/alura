@@ -4,13 +4,20 @@
     var title = document.querySelector(".titulo");
     title.textContent = "Aparecida Nutricionista";
 
+
+    // Adicionando listener remover no duplo clique
+    var tabela = document.querySelector("#tabela-pacientes");
+    tabela.addEventListener("dblclick", function(event) {
+        if(confirm("Deseja remover este paciente?")){
+            var alvoEvento = event.target;
+            var paiDoAlvo = alvoEvento.parentNode;
+            paiDoAlvo.remove();
+        }
+    });
+
     // Iterando pacientes
     var trPacientes = document.querySelectorAll(".paciente");
-    //var tdPaciente = document.querySelector("#primeiro-paciente");
-    for (var i = 0; i < trPacientes.length; i++) {
-        
-        // Recuperando dados tela
-        var trPaciente = trPacientes[i];
+    trPacientes.forEach(function(trPaciente) {
         var tdPeso = trPaciente.querySelector(".info-peso");
         var tdAltura = trPaciente.querySelector(".info-altura");
         var tdImc = trPaciente.querySelector(".info-imc");
@@ -30,6 +37,7 @@
         } else {
             trPaciente.classList.add("paciente-invalido")
         }
-    }
 
+    });
+        
 })();

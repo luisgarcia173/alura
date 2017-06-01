@@ -23,6 +23,7 @@ function validaAltura(altura) {
     }
 }
 
+// PUBLIC(Escopo Global) Validar campo em branco, nulo
 function validaValorVazio(valor) {
     if (valor == null || valor == 0) {
         return false;
