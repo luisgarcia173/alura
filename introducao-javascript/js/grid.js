@@ -22,7 +22,7 @@
         }
     });
 
-    // Iterando pacientes
+    // Iterando pacientes calcular IMC
     var trPacientes = document.querySelectorAll(".paciente");
     trPacientes.forEach(function(trPaciente) {
         var tdPeso = trPaciente.querySelector(".info-peso");

@@ -146,3 +146,18 @@ button[disabled=disabled], button:disabled {
 	opacity: 0;
 	transition: 0.5s;
 }
+
+.margem-baixo {
+	margin-bottom:10px;
+}
+
+.margem-cima {
+	margin-top:30px;
+}
+
+.invisivel {
+	display: none;
+}
+.visivel {
+	display: block;
+}
