@@ -12,12 +12,20 @@
         // Criando elementos da table
         var novoPacienteTr = montaTr(paciente);
 
+        // Valida form
+        var erros = validaPaciente(paciente);
+        if (erros.length > 0) {
+            exibeMensagensDeErro(erros);
+            return; // Força saída
+        }
+
         // Atualiza tabela
         var tabela = document.querySelector("#tabela-pacientes");
         tabela.appendChild(novoPacienteTr);
 
         // Limpa formulário
         form.reset();
+        document.querySelector("#mensagens-erro").innerHTML = "";
 
     });
 
@@ -53,6 +61,29 @@
         td.textContent = conteudo;
         td.classList.add(classe);
         return td;
+    }
+
+    // Valida form
+    function validaPaciente(paciente) {
+        var erros = [];
+        if (!validaValorVazio(paciente.nome.length)){ erros.push("O campo Nome não pode estar branco."); }
+        if (!validaValorVazio(paciente.peso.length)){ erros.push("O campo Peso não pode estar branco."); }
+        if (!validaValorVazio(paciente.altura.length)){ erros.push("O campo Altura não pode estar branco."); }
+        if (!validaValorVazio(paciente.gordura.length)){ erros.push("O campo %Gordura não pode estar branco."); }
+        if (!validaPeso(paciente.peso)){ erros.push("Peso inválido."); }
+        if (!validaAltura(paciente.altura)){ erros.push("Altura inválida."); }
+        return erros;
+    }
+
+    // Exibe erros
+    function exibeMensagensDeErro(erros) {
+        var ul = document.querySelector("#mensagens-erro");
+        ul.innerHTML = "";
+        erros.forEach(function(erro) {
+            var li = document.createElement("li");
+            li.textContent = erro;
+            ul.appendChild(li);
+        });
     }
 
 })();

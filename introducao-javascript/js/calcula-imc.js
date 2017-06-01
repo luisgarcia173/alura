@@ -19,16 +19,10 @@
         var altura = tdAltura.textContent;
 
         // Validações
-        var pesoEhValido = true;
-        var alturaEhValida = true;
-        if (peso <= 0 || peso >= 300) {
-            tdImc.textContent = "Peso inválido!";
-            pesoEhValido = false;
-        }
-        if (altura <= 0 || altura >= 4) {
-            tdImc.textContent = "Altura inválida!";
-            alturaEhValida = false;
-        }
+        var pesoEhValido = validaPeso(peso);
+        var alturaEhValida = validaAltura(altura);
+        if (!pesoEhValido) { tdImc.textContent = "Peso inválido!"; }
+        if (!alturaEhValida) { tdImc.textContent = "Altura inválida!"; }
 
         // IMC = peso / altura x altura;
         if (pesoEhValido && alturaEhValida) {
@@ -39,10 +33,3 @@
     }
 
 })();
-
-// PUBLIC(Escopo Global) Funcao para calculo IMC
-function calcularImc(peso, altura) {
-    var imc = 0;
-    imc = peso / (altura * altura);
-    return imc.toFixed(2);
-}
