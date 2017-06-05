@@ -30,3 +30,35 @@ function validaValorVazio(valor) {
     }
     return true;
 } 
+
+// PUBLIC(Escopo Global) Adicionar paciente
+function adicionarPaciente(paciente) {
+    // Criando elementos da table
+    var novoPacienteTr = montaTr(paciente);
+
+    // Atualiza tabela
+    var tabela = document.querySelector("#tabela-pacientes");
+    tabela.appendChild(novoPacienteTr);
+}
+
+// Monta linha da tabela
+function montaTr(paciente) {
+    var novoPacienteTr = document.createElement("tr");
+    novoPacienteTr.classList.add("paciente");
+
+    novoPacienteTr.appendChild(montaTd(paciente.nome, "info-nome"));
+    novoPacienteTr.appendChild(montaTd(paciente.peso, "info-peso"));
+    novoPacienteTr.appendChild(montaTd(paciente.altura.toFixed(2), "info-altura"));
+    novoPacienteTr.appendChild(montaTd(paciente.gordura, "info-gordura"));
+    novoPacienteTr.appendChild(montaTd(paciente.imc, "info-imc"));
+
+    return novoPacienteTr;
+}
+
+// Monta coluna para cada linha
+function montaTd(conteudo, classe) {
+    var td = document.createElement("td");
+    td.textContent = conteudo;
+    td.classList.add(classe);
+    return td;
+}

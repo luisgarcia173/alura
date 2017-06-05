@@ -9,9 +9,6 @@
         var form = document.querySelector("#form-adiciona");
         var paciente = obtemPacienteDoFormulatio(form);
 
-        // Criando elementos da table
-        var novoPacienteTr = montaTr(paciente);
-
         // Valida form
         var erros = validaPaciente(paciente);
         if (erros.length > 0) {
@@ -20,8 +17,7 @@
         }
 
         // Atualiza tabela
-        var tabela = document.querySelector("#tabela-pacientes");
-        tabela.appendChild(novoPacienteTr);
+        adicionarPaciente(paciente);
 
         // Limpa formulário
         form.reset();
@@ -39,28 +35,6 @@
             imc: calcularImc(form.peso.value, form.altura.value)
         };
         return paciente;
-    }
-
-    // Monta linha da tabela
-    function montaTr(paciente) {
-        var novoPacienteTr = document.createElement("tr");
-        novoPacienteTr.classList.add("paciente");
-
-        novoPacienteTr.appendChild(montaTd(paciente.nome, "info-nome"));
-        novoPacienteTr.appendChild(montaTd(paciente.peso, "info-peso"));
-        novoPacienteTr.appendChild(montaTd(paciente.altura, "info-altura"));
-        novoPacienteTr.appendChild(montaTd(paciente.gordura, "info-gordura"));
-        novoPacienteTr.appendChild(montaTd(paciente.imc, "info-imc"));
-
-        return novoPacienteTr;
-    }
-
-    // Monta coluna para cada linha
-    function montaTd(conteudo, classe) {
-        var td = document.createElement("td");
-        td.textContent = conteudo;
-        td.classList.add(classe);
-        return td;
     }
 
     // Valida form
