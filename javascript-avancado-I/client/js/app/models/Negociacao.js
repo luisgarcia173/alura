@@ -1,4 +1,4 @@
-// Classe modelo de Negociacao
+// Classe modelo de Negociacao (formulario)
 class Negociacao {
 
     // Regra Negociacao imutavel
