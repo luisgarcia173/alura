@@ -30,6 +30,19 @@ class NegociacoesView {
                 </tbody>
                 
                 <tfoot>
+                    <tr>
+                        <td colspan="3"></td>
+                        <td>
+                            ${
+                                //IIFF ((Immediately Invoked Function Expression)
+                                (function(){
+                                    let total = 0;
+                                    model.negociacoes.forEach(n => total += n.volume);
+                                    return total;
+                                })()
+                            }
+                        </td>
+                    </tr>
                 </tfoot>
             </table>
         `;
