@@ -17,4 +17,11 @@ class Negociacao {
         this.valor = valor;
     }
 
+    /* Classe rica: orientacao objetos dados acoplados à comportamento */
+
+    // Metodos
+    obtemVolume() {
+        return this.quantidade * this.valor;
+    }
+
 }
