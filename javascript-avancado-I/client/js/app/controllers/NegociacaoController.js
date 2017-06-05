@@ -2,7 +2,7 @@
 class NegociacaoController {
 
     // Construtor
-    construct() {
+    constructor() {
         // Recupera dados do form somente uma vez (performatico)
         let $ = document.querySelector.bind(document); // Copiando jQuery
         this._inputData = $("#data");
@@ -13,32 +13,21 @@ class NegociacaoController {
     // Metodos
     adiciona(event) {
         event.preventDefault(); // Previne reload tela
-        
-        // Conversao data 1
-        // let data = new Date(this._inputData.value.replace(/-/g, ','));
-        
-        // Conversao data 2
-        /*let data = new Date(
-            this._inputData.value
-                .split('-')
-                .map(function(item, indice) {
-                    return item - indice % 2;
-                })
-        );*/
 
-        // Conversao data 3 - Arrow function
-        let dataConvertida = new Date(
-            this._inputData.value // String
-                .split('-')
-                .map((item, indice) => item - indice % 2)
-        );
+        // DateHelper
+        let helper = new DateHelper();
+
+        console.log(this);
 
         // Instancia do modelo
         let negociacao = new Negociacao(
-            dataConvertida,
+            helper.textoParaData(this._inputData.value),
             this._inputQuantidade.value,
             this._inputValor.value
         );
+
+        console.log(negociacao);
+        console.log(helper.dataParaTexto(negociacao.data));
 
     }
 
