@@ -34,7 +34,7 @@ class NegociacoesView {
                         <td colspan="3"></td>
                         <td>
                             ${
-                                //IIFF ((Immediately Invoked Function Expression)
+                                //IIFE ((Immediately Invoked Function Expression)
                                 (function(){
                                     let total = 0;
                                     model.negociacoes.forEach(n => total += n.volume);
