@@ -10,12 +10,18 @@
         
         // Varre toda lista
         if (digitado.length > 0) {
+
+            // Expressao regular
+            var expressao = new RegExp(digitado, "i")
+
+            // Itera lista pacientes
             pacientes.forEach(function(paciente) {
                 var tdNome = paciente.querySelector(".info-nome");
                 var nome = tdNome.textContent;
 
                 // Verifica nome e inibe as que são diferentes
-                if (!nome.startsWith(digitado)) {
+                //if (!nome.startsWith(digitado)) {
+                if (!expressao.test(nome)) {
                     paciente.classList.add("invisivel");
                 } else {
                     paciente.classList.remove("invisivel");
