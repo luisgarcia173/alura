@@ -1,27 +1,29 @@
 // Classe modelo de Negociacao
 class Negociacao {
 
-    /* Classe anemica: dados sem comportamento */
-
-    // Construtor padrão
-    constructor() {
-        this.data = new Date();
-        this.quantidade = 1;
-        this.valor = 0.0;
-    }
-
-    // Construtor com campos
+    // Regra Negociacao imutavel
     constructor(data, quantidade, valor) {
-        this.data = data;
-        this.quantidade = quantidade;
-        this.valor = valor;
+        /* Convencao programacao (_) underscore atributo imutavel */
+        this._data = data;
+        this._quantidade = quantidade;
+        this._valor = valor;
     }
 
-    /* Classe rica: orientacao objetos dados acoplados à comportamento */
+    // Metodos Get & Set
+    getVolume() {
+        return this._quantidade * this._valor;
+    }
 
-    // Metodos
-    obtemVolume() {
-        return this.quantidade * this.valor;
+    getData() {
+        return this._data;
+    }
+
+    getQuantidade() {
+        return this._quantidade;
+    }
+
+    getValor() {
+        return this._valor;
     }
 
 }
