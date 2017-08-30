@@ -11,9 +11,10 @@ class ProxyFactory {
             get(target, prop, receiver) {
                 if (props.includes(prop) && ProxyFactory._ehFuncao(target[prop])) {
                     return function() {
-                        console.log(`Interceptado ${prop}`);
-                        Reflect.apply(target[prop], target, arguments);
-                        return acao(target);
+                        console.log(`Interceptado: ${prop}`);
+                        let retorno = Reflect.apply(target[prop], target, arguments);
+                        acao(target);
+                        return retorno;
                     }
                 }
                 return Reflect.get(target, prop, receiver);
@@ -21,11 +22,12 @@ class ProxyFactory {
 
             // Intercepta propriedade (Setter)
             set(target, prop, value, receiver){
+                let retorno = Reflect.set(target, prop, value, receiver);
                 if(props.includes(prop)) {
-                    console.log(`Interceptado ${prop}`);
+                    console.log(`Interceptado: ${prop}`);
                     acao(target);
                 }
-                return Reflect.set(target, prop, value, receiver);
+                return retorno;
             }
 
         });
