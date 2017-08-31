@@ -18,6 +18,19 @@ class NegociacaoController {
             new NegociacoesView($('#negociacoesView')),
             'adiciona', 'esvazia', 'ordena', 'inverteOrdem'
         );
+        
+        // Load inicial da tabela
+        ConnectionFactory
+            .getConnection()
+            .then(connection => {
+                new NegociacaoDao(connection)
+                    .listaTodos()
+                    .then(negociacoes => {
+                        negociacoes.forEach(negociacao => {
+                            this._listaNegociacoes.adiciona(negociacao);
+                        });
+                    });
+            });
 
         // Notificacoes
         this._mensagem = new Bind(
