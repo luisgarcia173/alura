@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Aprendendo IndexedDB</title>
+</head>
+<body>
+    <script src="js/app/models/Negociacao.js"></script>
+    <script>
+
+        var connection;
+
+        // Cria Database (nome, versao)
+        var openRequest = window.indexedDB.open('aluraframe', 3);
+        
+        // Quando criado ou alterado (baseado na versao)
+        openRequest.onupgradeneeded = (e) => {
+            console.log('Cria ou atualiza um banco já existente.');
+
+            let minhaConnection = e.target.result;
+
+            // Verifica se tabela existe e remove
+            if(minhaConnection.objectStoreNames.contains('negociacoes')){
+                minhaConnection.deleteObjectStore('negociacoes');    
+            }
+
+            // Cria tabela com auto incremento
+            minhaConnection.createObjectStore('negociacoes', {autoIncrement: true});
+        };
+
+        // Quando iniciado o DB
+        openRequest.onsuccess = (e) => {
+            console.log('Conexão obtida com sucesso!');
+            connection = e.target.result;
+        };
+
+        // Em caso de erro
+        openRequest.onerror = (e) => {
+            console.log(e.target.error);
+        };
+
+        function adiciona() {
+            // Abre transacao
+            let transaction = connection.transaction(['negociacoes'], 'readwrite');
+
+            // Recupero o Store transacional
+            let store = transaction.objectStore('negociacoes');
+
+            // Crio o dado a ser persistido
+            let negociacao = new Negociacao(new Date(), 1, 200);
+
+            // Crio requisicao
+            let request = store.add(negociacao);
+
+            request.onsuccess = (e) => {
+                console.log('Negociacao incluida com sucesso!');
+            };
+
+            request.onerror = (e) => {
+                console.log('Erro ao incluir negociacao!');
+            };
+
+        }
+
+        function listaTodos() {
+            // Abre transacao
+            let transaction = connection.transaction(['negociacoes'], 'readonly');
+
+            // Recupero o Store transacional
+            let store = transaction.objectStore('negociacoes');
+
+            // Cria ponteiro para iterar resultados
+            let cursor = store.openCursor();
+            
+            let negociacoes = [];
+
+            cursor.onsuccess = (e) => {
+                let atual = e.target.result;
+                if (atual) {
+                    // Retorna atributos e nao objeto
+                    let dado = atual.value;
+                    // Adiciono na lista criando instancia do objeto
+                    negociacoes.push(new Negociacao(dado._data, dado._quantidade, dado._volume));
+                    // Avanco o ponteiro
+                    atual.continue();
+                } else {
+                    // Exibe lista final
+                    console.log(negociacoes);
+                }
+            };
+
+            cursor.onerror = (e) => {
+                console.log(e.target.error.name);
+            };
+
+        }
+
+    </script>
+</body>
+</html>
