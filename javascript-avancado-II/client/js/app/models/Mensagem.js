@@ -2,7 +2,7 @@
 class Mensagem {
 
     // Construtor com valor padrao caso nenhum valor seja passado
-    constructor(texto="") {
+    constructor(texto='') {
         this._texto = texto;
     }
 

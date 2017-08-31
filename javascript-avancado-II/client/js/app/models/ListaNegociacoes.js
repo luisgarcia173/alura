@@ -7,7 +7,6 @@ class ListaNegociacoes {
 
     adiciona(negociacao) {
         this._negociacoes.push(negociacao);
-        //Reflect.apply(this._armadilha, this._contexto, [this]);
     }
 
     get negociacoes() {
@@ -17,6 +16,14 @@ class ListaNegociacoes {
 
     esvazia() {
         this._negociacoes = [];
+    }
+
+    ordena(criterio) {
+        this._negociacoes.sort(criterio);        
+    }
+
+    inverteOrdem() {
+        this._negociacoes.reverse();
     }
 
 }

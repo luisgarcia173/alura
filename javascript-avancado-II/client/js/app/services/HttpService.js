@@ -6,7 +6,7 @@ class HttpService {
 
             // Abre objeto ajax 
             let xhr = new XMLHttpRequest();
-            xhr.open("GET", url);
+            xhr.open('GET', url);
 
             // Configuracao
             xhr.onreadystatechange = () => {

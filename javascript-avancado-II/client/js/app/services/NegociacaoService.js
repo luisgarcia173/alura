@@ -16,7 +16,7 @@ class NegociacaoService {
                 })
                 .catch(erro => {
                     console.log(erro);
-                    reject("Não foi possível obter as negociaçōes da semana.");
+                    reject('Não foi possível obter as negociaçōes da semana.');
                 });
         });
     }
@@ -32,7 +32,7 @@ class NegociacaoService {
                 })
                 .catch(erro => {
                     console.log(erro);
-                    reject("Não foi possível obter as negociaçōes da semana anterior.");
+                    reject('Não foi possível obter as negociaçōes da semana anterior.');
                 });
         });
     }
@@ -48,7 +48,7 @@ class NegociacaoService {
                 })
                 .catch(erro => {
                     console.log(erro);
-                    reject("Não foi possível obter as negociaçōes da semana retrasada.");
+                    reject('Não foi possível obter as negociaçōes da semana retrasada.');
                 });
         });
     }
