@@ -37,6 +37,16 @@ class NegociacaoController {
     importa() {
         let service = new NegociacaoService();
 
+        // Trabalhando com promise para evitar piramide de callbacks (Design Pattern: Promise)
+        let promise = service.obterNegociacoesDaSemana();
+
+        promise
+            .then(negociacoes => { // resolve
+                negociacoes.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
+                this._mensagem.texto = "Importação das negociaçōes realizada com sucesso!";
+            }) //reject
+            .catch(erro => this._mensagem.texto = erro);
+        /*
         // Chama servico implementando callback com arrow function
         service.obterNegociacoesDaSemana((err, negociacoes) => {
             // Implemtentacao: error first
@@ -47,7 +57,7 @@ class NegociacaoController {
             // Trata Sucesso
             negociacoes.forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
             this._mensagem.texto = "Importação das negociaçōes realizada com sucesso!"
-       });
+       });*/
     }
 
     apaga() {
