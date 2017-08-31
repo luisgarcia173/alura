@@ -2,10 +2,11 @@
 var ConnectionFactory = (function(){
 
     // Scope variables
-    var stores = ['negociacoes'];
-    var version = 4;
-    var dbName = 'aluraframe'
-    var connection = null;
+    const stores = ['negociacoes'];
+    const version = 4;
+    const dbName = 'aluraframe';
+    let connection = null;
+    let close = null;
     
     // Classe responsavel por controlar conexao banco
     return class ConnectionFactory {
@@ -30,6 +31,14 @@ var ConnectionFactory = (function(){
                 openRequest.onsuccess = (e) => {
                     if(!connection){
                         connection = e.target.result;
+
+                        // Monkey Patch: pattern que força a modificação de um comportamento padrao API, neste caso está 
+                        // mandando uma exception quando o usuario tenta fechar conexao pelo objeto connection e nao pela
+                        // Factory
+                        close = connection.close.bind(connection);
+                        connection.close = function() {
+                            throw new Error("Não é possível encerrar a conexão diretamente!");
+                        };
                     }
                     resolve(connection);
                 };
@@ -41,6 +50,13 @@ var ConnectionFactory = (function(){
                 };
     
             });
+        }
+
+        static closeConnection() {
+            if(connection){
+                close();
+                connection = null;
+            }
         }
     
         static _createStores(connection) {
