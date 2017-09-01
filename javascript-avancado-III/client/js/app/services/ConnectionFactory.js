@@ -1,74 +1,87 @@
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 // Transforma classe em um modulo usando funcao anonima (Design Pattern: Module)
-var ConnectionFactory = (function(){
+var ConnectionFactory = function () {
 
     // Scope variables
-    const stores = ['negociacoes'];
-    const version = 4;
-    const dbName = 'aluraframe';
-    let connection = null;
-    let close = null;
-    
+    var stores = ['negociacoes'];
+    var version = 4;
+    var dbName = 'aluraframe';
+    var connection = null;
+    var close = null;
+
     // Classe responsavel por controlar conexao banco
-    return class ConnectionFactory {
-    
-        constructor() {
+    return function () {
+        function ConnectionFactory() {
+            _classCallCheck(this, ConnectionFactory);
+
             throw new Error('Não é possível criar instâncias de ConnectionFactory');
         }
-    
-        static getConnection() {
-            return new Promise((resolve, reject) => {
-    
-                // Cria Database (nome, versao)
-                let openRequest = window.indexedDB.open(dbName, version);
-    
-                // Quando criado ou alterado (baseado na versao)
-                openRequest.onupgradeneeded = (e) => {
-                    // Crio as stores
-                    ConnectionFactory._createStores(e.target.result);
-                };
-    
-                // Quando iniciado o DB
-                openRequest.onsuccess = (e) => {
-                    if(!connection){
-                        connection = e.target.result;
 
-                        // Monkey Patch: pattern que força a modificação de um comportamento padrao API, neste caso está 
-                        // mandando uma exception quando o usuario tenta fechar conexao pelo objeto connection e nao pela
-                        // Factory
-                        close = connection.close.bind(connection);
-                        connection.close = function() {
-                            throw new Error("Não é possível encerrar a conexão diretamente!");
-                        };
-                    }
-                    resolve(connection);
-                };
-    
-                // Em caso de erro
-                openRequest.onerror = (e) => {
-                    console.log(e.target.error);
-                    reject(e.target.error.name);
-                };
-    
-            });
-        }
+        _createClass(ConnectionFactory, null, [{
+            key: 'getConnection',
+            value: function getConnection() {
+                return new Promise(function (resolve, reject) {
 
-        static closeConnection() {
-            if(connection){
-                close();
-                connection = null;
+                    // Cria Database (nome, versao)
+                    var openRequest = window.indexedDB.open(dbName, version);
+
+                    // Quando criado ou alterado (baseado na versao)
+                    openRequest.onupgradeneeded = function (e) {
+                        // Crio as stores
+                        ConnectionFactory._createStores(e.target.result);
+                    };
+
+                    // Quando iniciado o DB
+                    openRequest.onsuccess = function (e) {
+                        if (!connection) {
+                            connection = e.target.result;
+
+                            // Monkey Patch: pattern que força a modificação de um comportamento padrao API, neste caso está 
+                            // mandando uma exception quando o usuario tenta fechar conexao pelo objeto connection e nao pela
+                            // Factory
+                            close = connection.close.bind(connection);
+                            connection.close = function () {
+                                throw new Error("Não é possível encerrar a conexão diretamente!");
+                            };
+                        }
+                        resolve(connection);
+                    };
+
+                    // Em caso de erro
+                    openRequest.onerror = function (e) {
+                        console.log(e.target.error);
+                        reject(e.target.error.name);
+                    };
+                });
             }
-        }
-    
-        static _createStores(connection) {
-            stores.forEach(store => {
-                // Verifica se tabela existe e remove
-                if (connection.objectStoreNames.contains(store)) {
-                    connection.deleteObjectStore(store)
+        }, {
+            key: 'closeConnection',
+            value: function closeConnection() {
+                if (connection) {
+                    close();
+                    connection = null;
                 }
-                // Cria tabela com auto incremento
-                connection.createObjectStore(store, {autoIncrement: true});
-            });
-        }
-    
-    }
-})();
+            }
+        }, {
+            key: '_createStores',
+            value: function _createStores(connection) {
+                stores.forEach(function (store) {
+                    // Verifica se tabela existe e remove
+                    if (connection.objectStoreNames.contains(store)) {
+                        connection.deleteObjectStore(store);
+                    }
+                    // Cria tabela com auto incremento
+                    connection.createObjectStore(store, { autoIncrement: true });
+                });
+            }
+        }]);
+
+        return ConnectionFactory;
+    }();
+}();
+//# sourceMappingURL=ConnectionFactory.js.map
