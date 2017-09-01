@@ -1,35 +1,15 @@
 // Classe que isola a complexidade do Service
 class HttpService {
 
+    _handleErrors(res) {
+        if (!res.ok) { throw new Error(res.statusText); }
+        return res;
+    }
+
     get(url) {
-        return new Promise((resolve, reject) => {
-
-            // Abre objeto ajax 
-            let xhr = new XMLHttpRequest();
-            xhr.open('GET', url);
-
-            // Configuracao
-            xhr.onreadystatechange = () => {
-                /*
-                0: requisicao nao iniciada
-                1: conexao estabelecida
-                2: requisicao recebida
-                3: processando requisicao
-                4: requisicao concluida
-                */
-                if (xhr.readyState == 4) {
-                    if (xhr.status == 200) { // HTTP code de sucesso
-                        // Parse json do array
-                        resolve(JSON.parse(xhr.responseText));
-                    } else {
-                        reject(xhr.responseText);
-                    }
-                }
-            };
-
-            // Request servico
-            xhr.send();
-        });
+        return fetch(url)
+            .then(res => this._handleErrors(res))
+            .then(res => res.json());
     }
 
     post(url, dado) {
