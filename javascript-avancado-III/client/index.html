@@ -32,7 +32,7 @@
     </form>
     
     <div class="text-center">
-        <button onclick="negociacaoController.apaga()" class="btn btn-primary text-center" type="button">
+        <button class="btn btn-primary text-center" type="button">
             Apagar
         </button>
     </div> 
@@ -41,7 +41,15 @@
 
     <div id="negociacoesView"></div>
     
-    <script src="js/app/polyfill/fetch.js"></script>
+    <script src="node_modules/systemjs/dist/system.js"></script>
+    <script>
+        System.defaultJSExtensions = true;
+        System.import('js/app/boot').catch(function(err) {
+            console.error(err);
+        });
+    </script>
+
+    <!--script src="js/app/polyfill/fetch.js"></script>
     <script src="js/app/models/Negociacao.js"></script>
     <script src="js/app/models/ListaNegociacoes.js"></script>
     <script src="js/app/models/Mensagem.js"></script>
@@ -59,7 +67,7 @@
     
     <script>
         let negociacaoController = new NegociacaoController();
-    </script>
+    </script-->
 
 </body>
 </html>

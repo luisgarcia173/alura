@@ -1,5 +1,7 @@
+import {Negociacao} from '../models/Negociacao';
+
 // Classe responsavel pelo acesso dados base para negociacao
-class NegociacaoDao {
+export class NegociacaoDao {
 
     constructor(connection){
         this._connection = connection;

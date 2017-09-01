@@ -1,5 +1,5 @@
 // Classe repsonsavel pelo conteudo da mensagem exibida em tela
-class Mensagem {
+export class Mensagem {
 
     // Construtor com valor padrao caso nenhum valor seja passado
     constructor(texto='') {

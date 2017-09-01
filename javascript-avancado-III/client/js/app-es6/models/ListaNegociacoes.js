@@ -1,5 +1,5 @@
 // Classe responsavel pela lista de negociacoes
-class ListaNegociacoes {
+export class ListaNegociacoes {
 
     constructor() {
         this._negociacoes = [];

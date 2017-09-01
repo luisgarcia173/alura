@@ -1,5 +1,5 @@
 // Classe de conversão de Data
-class DateHelper {
+export class DateHelper {
 
     // Força erro quando tentar instanciar
     constructor() {

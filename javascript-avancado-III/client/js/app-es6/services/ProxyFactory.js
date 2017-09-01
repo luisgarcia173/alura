@@ -1,5 +1,5 @@
 // Classe encapsular proxy da controller (Design Pattern: Factory)
-class ProxyFactory {
+export class ProxyFactory {
 
     // Nao precisa da instancia da classe
     static create(objeto, props, acao) {

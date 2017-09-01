@@ -1,5 +1,5 @@
 // Classe modelo de Negociacao (formulario)
-class Negociacao {
+export class Negociacao {
 
     // Regra Negociacao imutavel
     constructor(data, quantidade, valor) {
