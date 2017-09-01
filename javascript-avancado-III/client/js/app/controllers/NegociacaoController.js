@@ -18,19 +18,6 @@ class NegociacaoController {
             new NegociacoesView($('#negociacoesView')),
             'adiciona', 'esvazia', 'ordena', 'inverteOrdem'
         );
-        
-        // Load inicial da tabela
-        ConnectionFactory
-            .getConnection()
-            .then(connection => new NegociacaoDao(connection))
-            .then(dao => dao.listaTodos())
-            .then(negociacoes => 
-                negociacoes.forEach(negociacao => 
-                    this._listaNegociacoes.adiciona(negociacao)))
-            .catch(erro => {
-                console.log(erro);
-                this._mensagem.texto = error;
-            });
 
         // Notificacoes
         this._mensagem = new Bind(
@@ -38,6 +25,23 @@ class NegociacaoController {
             new MensagemView($('#mensagemView')),
             'texto'
         );
+
+        this._init();
+    }
+
+    _init() {
+        // Load inicial da tabela
+        ConnectionFactory
+        .getConnection()
+        .then(connection => new NegociacaoDao(connection))
+        .then(dao => dao.listaTodos())
+        .then(negociacoes => 
+            negociacoes.forEach(negociacao => 
+                this._listaNegociacoes.adiciona(negociacao)))
+        .catch(erro => {
+            console.log(erro);
+            this._mensagem.texto = error;
+        });
     }
 
     // Metodos
@@ -62,17 +66,18 @@ class NegociacaoController {
     importa() {
         let service = new NegociacaoService();
 
-        Promise.all([
-            service.obterNegociacoesDaSemana(),
-            service.obterNegociacoesDaSemanaAnterior(),
-            service.obterNegociacoesDaSemanaRetrasada()]
-        ).then(negociacoes => {
-            negociacoes
-                .reduce((arrayAchatado, array) => arrayAchatado.concat(array), [])
-                .forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
-            this._mensagem.texto = 'Importação das negociaçōes realizada com sucesso!';
-        })
-        .catch(erro => this._mensagem.texto = erro);
+        service
+            .obterNegociacoes()
+            /*.then(negociacoes => {
+                negociacoes.filter(negociacao => 
+                    !this._listaNegociacoes.negociacoes.some(negociacaoExistente =>
+                        JSON.stringify(negociacao) == JSON.stringify(negociacaoExistente)))
+            })*/
+            .then(negociacoes => negociacoes.forEach(negociacao => {
+                this._listaNegociacoes.adiciona(negociacao);
+                this._mensagem.texto = 'Negociações do período importadas'   
+            }))
+            .catch(erro => this._mensagem.texto = erro);  
     }
 
     apaga() {
