@@ -8,7 +8,7 @@ import {DateHelper} from '../helpers/DateHelper';
 import {Bind} from '../helpers/Bind';
 
 // Classe controller de Negociacao (acoes tela)
-export class NegociacaoController {
+class NegociacaoController {
 
     // Construtor
     constructor() {
@@ -118,4 +118,10 @@ export class NegociacaoController {
         this._inputData.focus();
     }
 
+}
+
+// Pattern: Singleton
+let negociacaoController = new NegociacaoController();
+export function currentInstance() {
+    return negociacaoController;
 }
