@@ -42,6 +42,11 @@ class NegociacaoController {
             console.log(erro);
             this._mensagem.texto = error;
         });
+
+        // Importa negociacoes a cada 3 seg
+        setInterval(() => {
+            this._importaNegociacoes();
+        }, 3000);
     }
 
     // Metodos
@@ -63,16 +68,11 @@ class NegociacaoController {
             .catch(erro => this._mensagem.texto = erro);
     }
 
-    importa() {
+    _importaNegociacoes() {
         let service = new NegociacaoService();
 
         service
             .obterNegociacoes()
-            /*.then(negociacoes => {
-                negociacoes.filter(negociacao => 
-                    !this._listaNegociacoes.negociacoes.some(negociacaoExistente =>
-                        JSON.stringify(negociacao) == JSON.stringify(negociacaoExistente)))
-            })*/
             .then(negociacoes => negociacoes.forEach(negociacao => {
                 this._listaNegociacoes.adiciona(negociacao);
                 this._mensagem.texto = 'Negociações do período importadas'   
