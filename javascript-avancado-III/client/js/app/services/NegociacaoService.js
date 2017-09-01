@@ -110,4 +110,18 @@ class NegociacaoService {
         });
     }
 
+    importa(listaAtual) {
+        return this.obterNegociacoes()
+                // Logica para evitar deplicados
+                .then(negociacoes => 
+                    negociacoes.filter(negociacao => 
+                        !listaAtual.some(negociacaoExistente => 
+                            JSON.stringify(negociacao) == JSON.stringify(negociacaoExistente)))
+                )
+                .catch(erro => {
+                    console.log(erro);
+                    throw new Error(erro);
+                });
+    }
+
 }

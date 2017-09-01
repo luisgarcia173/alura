@@ -41,9 +41,9 @@ class NegociacaoController {
             .catch(erro => this._mensagem.texto = erro);
 
         // Importa negociacoes a cada 3 seg
-        /*setInterval(() => {
+        setInterval(() => {
             this._importaNegociacoes();
-        }, 3000);*/
+        }, 3000);
     }
 
     // Metodos
@@ -63,7 +63,7 @@ class NegociacaoController {
 
     _importaNegociacoes() {
         this._service
-            .obterNegociacoes()
+            .importa(this._listaNegociacoes.negociacoes)
             .then(negociacoes => negociacoes.forEach(negociacao => {
                 this._listaNegociacoes.adiciona(negociacao);
                 this._mensagem.texto = 'Negociações do período importadas'   
