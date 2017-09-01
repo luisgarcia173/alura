@@ -68,6 +68,46 @@ class NegociacaoService {
         }).catch(erro => {
             throw new Error(erro);
         });
-	} 
+    }
+    
+    cadastra(negociacao) {
+        return new Promise((resolve, reject) => {
+            ConnectionFactory
+                .getConnection()
+                .then(connection => new NegociacaoDao(connection))
+                .then(dao => dao.adiciona(negociacao))
+                .then(() => resolve('Negociação adicionada com sucesso!'))
+                .catch(erro => {
+                    console.log(erro);
+                    reject('Não foi possível adicionar a Negociação!')
+                });
+        });
+    }
+
+    lista() {
+        return new Promise((resolve, reject) => {
+            ConnectionFactory
+                .getConnection()
+                .then(connection => new NegociacaoDao(connection))
+                .then(dao => resolve(dao.listaTodos()))
+                .catch(erro => {
+                    console.log(erro);
+                    reject(erro);
+                });
+        });
+    }
+
+    apaga() {
+        return new Promise((resolve, reject) => {
+            ConnectionFactory
+                .getConnection()
+                .then(connection => new NegociacaoDao(connection))
+                .then(dao => resolve(dao.apagaTodos()))
+                .catch(erro => {
+                    console.log(erro);
+                    reject(erro);
+                });
+        });
+    }
 
 }
