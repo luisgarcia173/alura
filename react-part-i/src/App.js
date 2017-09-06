@@ -54,16 +54,16 @@ class App extends Component {
                   <fieldset>
                     <legend>Author Data</legend>
                     <div className="pure-control-group">
-                      <label htmlFor="name">Name</label> 
-                      <input id="name" type="text" name="name" value="" placeholder="Name" />                  
+                      <label for="name">Name</label> 
+                      <input id="name" type="text" name="name" value="" placeholder="Name" required/>                  
                     </div>
                     <div className="pure-control-group">
-                      <label htmlFor="email">Email</label> 
-                      <input id="email" type="email" name="email" value="" placeholder="Email"  />                  
+                      <label for="email">Email</label> 
+                      <input id="email" type="email" name="email" value="" placeholder="Email" required/>                  
                     </div>
                     <div className="pure-control-group">
-                      <label htmlFor="password">Password</label> 
-                      <input id="password" type="password" name="password" placeholder="Password" />                                      
+                      <label for="password">Password</label> 
+                      <input id="password" type="password" name="password" placeholder="Password" required/>                                      
                     </div>
                     <div className="pure-control-group">                                  
                       <label></label> 
