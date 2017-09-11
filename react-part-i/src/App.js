@@ -4,6 +4,8 @@ import './App.css';
 import './css/pure-min.css';
 import './css/side-menu.css';
 import $ from 'jquery';
+import InputCustomizado from './componentes/InputCustomizado';
+import BotaoSubmitCustomizado from './componentes/BotaoSubmitCustomizado';
 
 class App extends Component {
 
@@ -105,22 +107,10 @@ class App extends Component {
                 <form className="pure-form pure-form-aligned" onSubmit={this.enviaForm} method="post">
                   <fieldset>
                     <legend>Author Data</legend>
-                    <div className="pure-control-group">
-                      <label for="name">Name</label> 
-                      <input id="name" type="text" name="name" value={this.state.nome} onChange={this.setNome} placeholder="Name" required/>                  
-                    </div>
-                    <div className="pure-control-group">
-                      <label for="email">Email</label> 
-                      <input id="email" type="email" name="email" value={this.state.email} onChange={this.setEmail} placeholder="Email" required/>                  
-                    </div>
-                    <div className="pure-control-group">
-                      <label for="password">Password</label> 
-                      <input id="password" type="password" name="password" value={this.state.senha} onChange={this.setSenha} placeholder="Password" required/>                                      
-                    </div>
-                    <div className="pure-control-group">                                  
-                      <label></label> 
-                      <button type="submit" className="pure-button pure-button-primary">Save</button>                                    
-                    </div>
+                    <InputCustomizado id="nome" type="text" name="nome" value={this.state.nome} onChange={this.setNome} label="Nome" placeholder="Nome"/>                                              
+                    <InputCustomizado id="email" type="email" name="email" value={this.state.email} onChange={this.setEmail} label="Email" placeholder="Email"/>                                              
+                    <InputCustomizado id="senha" type="password" name="senha" value={this.state.senha} onChange={this.setSenha} label="Senha" placeholder="Senha"/>                                                                      
+                    <BotaoSubmitCustomizado label="Gravar"/>
                   </fieldset>
                 </form>
               </div> 
