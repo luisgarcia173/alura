@@ -44,8 +44,9 @@ class App extends Component {
       type: 'post',
       data: JSON.stringify({nome: this.state.nome, email: this.state.email, senha: this.state.senha}),
       success:function(resposta){
+        this.setState({lista: resposta});
         console.log("enviado com sucesso");
-      },
+      }.bind(this),
       error:function(resposta){
         console.log("erro");
       }
