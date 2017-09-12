@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import AutorBox from './Autor';
 
 /* 
   BrowserRouter: rotas dinamicas
@@ -11,13 +12,13 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 */
 ReactDOM.render(
   (
-  <BrowserRouter> 
-    <Switch>
-      <Route path="/" component={App}/>
-      <Route path="/autor"/>
-      <Route path="/livro"/>
-    </Switch>
-  </BrowserRouter>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={App}/>
+        <Route path="/autor" component={AutorBox}/>
+        <Route path="/livro"/>
+      </Switch>
+    </Router>
   ),
   document.getElementById('root')
 );

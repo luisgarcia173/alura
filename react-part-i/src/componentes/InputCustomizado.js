@@ -14,7 +14,7 @@ export default class InputCustomizado extends Component {
                 this.setState({msgErro:erro.defaultMessage});
             }
         }.bind(this));
-        
+
         PubSub.subscribe("limpa-erros",function(topico){
             this.setState({msgErro: ''});
         }.bind(this));    
@@ -23,7 +23,7 @@ export default class InputCustomizado extends Component {
     render() {
         return (
             <div className="pure-control-group">
-                <label for={this.props.id}>{this.props.label}</label> 
+                <label htmlFor={this.props.id}>{this.props.label}</label> 
                 <input id={this.props.id} type={this.props.type} name={this.props.name} value={this.props.value} onChange={this.props.onChange} placeholder={this.props.placeholder} />                  
                 <span className="erro"> {this.state.msgErro}</span>
             </div>

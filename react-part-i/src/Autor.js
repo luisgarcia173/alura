@@ -126,9 +126,20 @@ export default class AutorBox extends Component {
 
     render() {
         return (
-            <div>
-                <FormularioAutor/>
-                <TabelaAutores lista={this.state.lista}/>
+            <div id="main">
+                <div className="header">
+                    <h1>Author Registration</h1>
+                    <h2>Please fill the form with the Author data</h2>
+                </div>
+            
+                <div className="content">
+                    <h2 className="content-subhead">Why should you input Authors in our database?</h2>
+                    <p>
+                        Each Author is responsible for explain their published work, it means you only can registrate a new Author if his has at least a book published.
+                    </p>
+                    <FormularioAutor/>
+                    <TabelaAutores lista={this.state.lista}/>
+                </div>
             </div>
         );
     }
