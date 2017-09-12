@@ -3,12 +3,11 @@ import $ from 'jquery';
 import InputCustomizado from './componentes/InputCustomizado';
 import BotaoSubmitCustomizado from './componentes/BotaoSubmitCustomizado';
 
-export class FormularioAutor extends Component{
+class FormularioAutor extends Component{
 
     constructor() {
         super();
         this.state = {
-            lista : [],
             nome: '', email: '', senha: ''
         };
         this.enviaForm = this.enviaForm.bind(this); // associa o this do react dentro desse metodo
@@ -31,7 +30,7 @@ export class FormularioAutor extends Component{
             type: 'post',
             data: JSON.stringify({nome: this.state.nome, email: this.state.email, senha: this.state.senha}),
             success:function(resposta){
-                this.setState({lista: resposta});
+                this.props.callbackAtualizaListagem(resposta);
                 console.log("enviado com sucesso");
             }.bind(this),
             error:function(resposta){
@@ -56,13 +55,47 @@ export class FormularioAutor extends Component{
         );
     }
     
-
 }
-export class TabelaAutores extends Component {
+
+class TabelaAutores extends Component {
+
+    render() {
+        return (
+            <div>
+                <fieldset>
+                    <legend>Author's List</legend>            
+                    <table className="pure-table pure-u-5-5">
+                        <thead>
+                            <tr>
+                                <th width="75%">Name</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {
+                            this.props.lista.map(function(autor) {
+                                return (
+                                    <tr key={autor.id}>
+                                        <td>{autor.nome}</td>                
+                                        <td>{autor.email}</td>                
+                                    </tr>
+                                );
+                            })
+                        }
+                        </tbody>
+                    </table>
+                </fieldset>
+            </div>
+        );
+    }
+}
+
+export default class AutorBox extends Component {
 
     constructor() {
         super();
         this.state = {lista : []};
+        this.atualizaListagem = this.atualizaListagem.bind(this);
     }
 
     componentDidMount() {
@@ -80,32 +113,15 @@ export class TabelaAutores extends Component {
         // Executa antes do render ser executado
     }
 
+    atualizaListagem(novaLista) {
+        this.setState({lista:novaLista});
+    }
+
     render() {
         return (
             <div>
-                <fieldset>
-                    <legend>Author's List</legend>            
-                    <table className="pure-table pure-u-5-5">
-                        <thead>
-                            <tr>
-                                <th width="75%">Name</th>
-                                <th>Email</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {
-                            this.state.lista.map(function(autor) {
-                                return (
-                                    <tr key={autor.id}>
-                                        <td>{autor.nome}</td>                
-                                        <td>{autor.email}</td>                
-                                    </tr>
-                                );
-                            })
-                        }
-                        </tbody>
-                    </table>
-                </fieldset>
+                <FormularioAutor callbackAtualizaListagem={this.atualizaListagem}/>
+                <TabelaAutores lista={this.state.lista}/>
             </div>
         );
     }

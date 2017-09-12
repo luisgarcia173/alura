@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import './css/pure-min.css';
 import './css/side-menu.css';
-import {FormularioAutor, TabelaAutores} from './Autor';
+import AutorBox from './Autor';
 
 class App extends Component {
 
@@ -40,8 +40,7 @@ class App extends Component {
               <p>
                   Each Author is responsible for explain their published work, it means you only can registrate a new Author if his has at least a book published.
               </p>
-              <FormularioAutor />
-              <TabelaAutores />
+              <AutorBox />
             </div>
         </div>
     </div>
