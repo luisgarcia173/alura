@@ -51,7 +51,6 @@ class FormularioAutor extends Component{
             <div className="pure-form pure-form-aligned">
                 <form className="pure-form pure-form-aligned" onSubmit={this.enviaForm} method="post">
                     <fieldset>
-                        <legend>Author Data</legend>
                         <InputCustomizado id="nome" type="text" name="nome" value={this.state.nome} onChange={this.setNome} label="Name" placeholder="Name"/>                                              
                         <InputCustomizado id="email" type="email" name="email" value={this.state.email} onChange={this.setEmail} label="Email" placeholder="Email"/>                                              
                         <InputCustomizado id="senha" type="password" name="senha" value={this.state.senha} onChange={this.setSenha} label="Password" placeholder="Password"/>                                                                      
@@ -126,19 +125,21 @@ export default class AutorBox extends Component {
 
     render() {
         return (
-            <div id="main">
-                <div className="header">
-                    <h1>Author Registration</h1>
-                    <h2>Please fill the form with the Author data</h2>
-                </div>
-            
-                <div className="content">
-                    <h2 className="content-subhead">Why should you input Authors in our database?</h2>
-                    <p>
-                        Each Author is responsible for explain their published work, it means you only can registrate a new Author if his has at least a book published.
-                    </p>
-                    <FormularioAutor/>
-                    <TabelaAutores lista={this.state.lista}/>
+            <div className="content pure-u-3-4">
+                <div>
+                    <div className="posts">
+                        <h1 className="content-subhead">Author Data</h1>
+        
+                        <section className="post">
+                            <header className="post-header">
+                                <h2 className="post-title">Author Registration</h2>
+                            </header>
+                            <div className="post-description">
+                                <FormularioAutor/>
+                                <TabelaAutores lista={this.state.lista}/>
+                            </div>
+                         </section>
+                    </div>
                 </div>
             </div>
         );
