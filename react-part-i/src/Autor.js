@@ -3,6 +3,7 @@ import $ from 'jquery';
 import InputCustomizado from './componentes/InputCustomizado';
 import BotaoSubmitCustomizado from './componentes/BotaoSubmitCustomizado';
 import PubSub from 'pubsub-js';  // Middleware de mensageria
+import TratadorErros from './TratadorErros';
 
 class FormularioAutor extends Component{
 
@@ -31,12 +32,16 @@ class FormularioAutor extends Component{
             type: 'post',
             data: JSON.stringify({nome: this.state.nome, email: this.state.email, senha: this.state.senha}),
             success:function(novaListagem){
-                //this.props.callbackAtualizaListagem(resposta);
                 PubSub.publish('atualiza-lista-autores', novaListagem); //Dispara evento para os demais componentes (topico, objeto)
-                console.log("enviado com sucesso");
-            },
+                this.setState({nome: '', email: '', senha: ''});
+            }.bind(this),
             error:function(resposta){
-                console.log("erro");
+                if (resposta.status === 400) {
+                    new TratadorErros().publicaErros(resposta.responseJSON);
+                }
+            },
+            beforeSend:function(){
+                PubSub.publish('limpa-erros', {});
             }
         });
     }
@@ -47,10 +52,10 @@ class FormularioAutor extends Component{
                 <form className="pure-form pure-form-aligned" onSubmit={this.enviaForm} method="post">
                     <fieldset>
                         <legend>Author Data</legend>
-                        <InputCustomizado id="nome" type="text" name="nome" value={this.state.nome} onChange={this.setNome} label="Nome" placeholder="Nome"/>                                              
+                        <InputCustomizado id="nome" type="text" name="nome" value={this.state.nome} onChange={this.setNome} label="Name" placeholder="Name"/>                                              
                         <InputCustomizado id="email" type="email" name="email" value={this.state.email} onChange={this.setEmail} label="Email" placeholder="Email"/>                                              
-                        <InputCustomizado id="senha" type="password" name="senha" value={this.state.senha} onChange={this.setSenha} label="Senha" placeholder="Senha"/>                                                                      
-                        <BotaoSubmitCustomizado label="Gravar"/>
+                        <InputCustomizado id="senha" type="password" name="senha" value={this.state.senha} onChange={this.setSenha} label="Password" placeholder="Password"/>                                                                      
+                        <BotaoSubmitCustomizado label="Save"/>
                     </fieldset>
                 </form>
             </div> 
