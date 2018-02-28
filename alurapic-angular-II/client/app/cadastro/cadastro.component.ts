@@ -4,9 +4,8 @@ import {Component} from '@angular/core';
 //Decorator
 @Component({
     moduleId: module.id,
-    selector: 'app',
-    templateUrl: './app.component.html'
+    selector: 'cadastro',
+    templateUrl: './cadastro.component.html'
 })
-export class AppComponent {
-
+export class CadastroComponent {
 }
