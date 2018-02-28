@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map'; //to use map operator in arrow functions
 import {NgModule} from '@angular/core'; //to use decorator NgModule
 import {BrowserModule} from '@angular/platform-browser'; //to start first component
 import {HttpModule} from '@angular/http'; //to consume REST services
-import {FormsModule} from '@angular/forms'; //to use ngModel
+import {FormsModule, ReactiveFormsModule} from '@angular/forms'; //to use ngModel and 
 //modules
 import {FotoModule} from './foto/foto.module';
 import {PainelModule} from './painel/painel.module';
@@ -18,7 +18,7 @@ import {routing} from './app.routes'; //
 
 //Decorator
 @NgModule({
-    imports: [ BrowserModule, FotoModule, PainelModule, HttpModule, routing, FormsModule ],
+    imports: [ BrowserModule, FotoModule, PainelModule, HttpModule, routing, FormsModule, ReactiveFormsModule ],
     declarations: [ AppComponent, CadastroComponent, ListagemComponent ],
     bootstrap: [ AppComponent ]
 })
