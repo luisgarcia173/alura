@@ -22,7 +22,6 @@ export class ListagemComponent {
             .map(res => res.json())
             .subscribe(fotos => {
                 this.fotos = fotos;
-                console.log(this.fotos);
             }, erro => console.log(erro));
     }
 
