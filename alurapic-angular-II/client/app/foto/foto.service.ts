@@ -33,6 +33,12 @@ export class FotoService {
 		return this.http
 			.post(this.url, JSON.stringify(foto), { headers: this.headers }); 
 
-	}
+    }
+    
+    remover(foto: FotoComponent): Observable<Response> {
+        //DELETE
+        return this.http
+            .delete(this.url + '/' + foto._id);
+    } 
 
 }
