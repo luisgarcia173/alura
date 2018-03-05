@@ -1,8 +1,8 @@
 //Imports
 import {Component} from '@angular/core';
-import {FotoComponent} from '../foto/foto.component';
-import {Http, Headers} from '@angular/http';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {FotoComponent} from '../foto/foto.component';
+import {FotoService} from '../foto/foto.service';
 
 //Decorator
 @Component({
@@ -14,12 +14,13 @@ export class CadastroComponent {
 
     //Attributes
     foto: FotoComponent = new FotoComponent();
-    http: Http;
+    service: FotoService;
     meuForm: FormGroup;
 
     //Constructor
-    constructor(http: Http, fb: FormBuilder){
-        this.http = http;
+    constructor(service: FotoService, fb: FormBuilder){
+        //service
+        this.service = service;
 
         //validations
         this.meuForm = fb.group({
@@ -36,13 +37,9 @@ export class CadastroComponent {
         //avoid page reload
         event.preventDefault();
 
-        //set HTTP header
-        let headers = new Headers();
-        headers.append('Content-Type','application/json');
-
-        //POST
-        this.http
-            .post('v1/fotos', JSON.stringify(this.foto), {headers: headers})
+        //service call (ADD)
+        this.service
+            .cadastrar(this.foto)
             .subscribe(() => {
                 //clean data form
                 this.foto = new FotoComponent();

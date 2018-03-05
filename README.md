@@ -11,4 +11,4 @@ Workspace relacionado aos Cursos da ALURA onde foi necessário gerar alguma codi
 * [05/09/2017] - React I - [12/09/2017]
 * [15/09/2017] - Front-end: Projeto final de carreira - [15/09/2017]
 * [26/02/2018] - Angular 2 - Part I - [28/02/2018]
-* [] - Angular 2 - Part II - []
+* [05/03/2018] - Angular 2 - Part II - []

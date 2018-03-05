@@ -1,6 +1,7 @@
 //Imports
 import {Component} from '@angular/core';
-import {Http} from '@angular/http';
+import {FotoService} from '../foto/foto.service';
+import {FotoComponent} from '../foto/foto.component';
 
 //Decorator
 @Component({
@@ -11,15 +12,13 @@ import {Http} from '@angular/http';
 export class ListagemComponent {
 
     //Attributes
-    fotos: Object[] = [];
+    fotos: FotoComponent[] = [];
 
     //Constructor
-    constructor(http:Http){
-
-        //GET
-        http
-            .get('v1/fotos')
-            .map(res => res.json())
+    constructor(service:FotoService){
+        //first load
+        service
+            .listar()
             .subscribe(fotos => {
                 this.fotos = fotos;
             }, erro => console.log(erro));
