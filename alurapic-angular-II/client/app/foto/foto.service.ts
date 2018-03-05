@@ -29,10 +29,15 @@ export class FotoService {
     }
 
     cadastrar(foto: FotoComponent): Observable<Response> {
-		//POST
-		return this.http
-			.post(this.url, JSON.stringify(foto), { headers: this.headers }); 
-
+        if (foto._id) {
+            //PUT
+            return this.http
+                .put(this.url + '/' + foto._id, JSON.stringify(foto), { headers: this.headers });
+        } else {
+            //POST
+            return this.http
+                .post(this.url, JSON.stringify(foto), { headers: this.headers }); 
+        }
     }
     
     remover(foto: FotoComponent): Observable<Response> {
