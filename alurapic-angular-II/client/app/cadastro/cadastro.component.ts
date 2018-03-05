@@ -3,6 +3,7 @@ import {Component} from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {FotoComponent} from '../foto/foto.component';
 import {FotoService} from '../foto/foto.service';
+import {ActivatedRoute} from '@angular/router';
 
 //Decorator
 @Component({
@@ -14,14 +15,28 @@ export class CadastroComponent {
 
     //Attributes
     foto: FotoComponent = new FotoComponent();
-    service: FotoService;
     meuForm: FormGroup;
+    service: FotoService;
+    route: ActivatedRoute;
 
     //Constructor
-    constructor(service: FotoService, fb: FormBuilder){
+    constructor(service: FotoService, fb: FormBuilder, route: ActivatedRoute){
         //service
         this.service = service;
 
+        //route
+        this.route = route;
+        this.route.params.subscribe(params => {
+            let id = params['id'];
+            
+            this.service
+                .buscarPor(id)
+                .subscribe(
+                    foto => this.foto = foto,
+                    erro => console.log(erro) 
+                );
+        });
+        
         //validations
         this.meuForm = fb.group({
             titulo: ['', Validators.compose(
