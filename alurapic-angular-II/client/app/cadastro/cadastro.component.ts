@@ -19,6 +19,8 @@ export class CadastroComponent {
     service: FotoService;
     route: ActivatedRoute;
     router: Router;
+    id: string = '';
+    mensagem: string = '';
 
     //Constructor
     constructor(service: FotoService, fb: FormBuilder, route: ActivatedRoute, router: Router){
@@ -29,12 +31,12 @@ export class CadastroComponent {
         this.router = router;
         this.route = route;
         this.route.params.subscribe(params => {
-            let id = params['id'];
+            this.id = params['id'];
             
             //search when you have id as param
-            if(id) {
+            if(this.id) {
                 this.service
-                    .buscarPor(id)
+                    .buscarPor(this.id)
                     .subscribe(
                         foto => this.foto = foto,
                         erro => console.log(erro) 
@@ -60,11 +62,13 @@ export class CadastroComponent {
         //service call (ADD)
         this.service
             .cadastrar(this.foto)
-            .subscribe(() => {
-                //clean data form
+            .subscribe(res => {
+                this.mensagem = res.obterMensagem();
                 this.foto = new FotoComponent();
-                console.log('Foto salva com sucesso!');
-                this.router.navigate(['']); //move to default route
-            }, erro => console.log(erro));
+                if (!res.ehInclusao()) this.router.navigate(['']); //move to default route
+            }, erro => {
+                console.log(erro);
+                this.mensagem = 'Não foi possível salvar a foto.';
+            });
     }
 }
