@@ -25,7 +25,8 @@
                 <foto titulo="{{foto.titulo}}" url="{{foto.url}}"></foto>
             </a>
             <br />
-            <botao nome="Remover" estilo="btn-danger btn-block" (acao)="remover(foto, painel)" confirmacao="true"></botao>
+            <botao nome="Remover" estilo="btn-danger btn-block" (acao)="modal.show()" confirmacao="true"></botao>
+            <modal #modal frase="Tem certeza que deseja remover esta foto?" (confirma)="remover(foto, painel)"></modal>
         </painel>
     </div> <!-- fim row -->
 </div>
