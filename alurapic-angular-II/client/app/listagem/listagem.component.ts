@@ -45,6 +45,7 @@ export class ListagemComponent {
                     console.log(erro);
                     this.mensagem = 'Não foi possível remover a foto';
                 }
+            );
     }
 
 }
