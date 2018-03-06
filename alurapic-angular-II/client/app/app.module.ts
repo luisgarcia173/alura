@@ -9,6 +9,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms'; //to use ngMode
 //modules
 import {FotoModule} from './foto/foto.module';
 import {PainelModule} from './painel/painel.module';
+import {BotaoModule} from './botao/botao.module';
 //components
 import {AppComponent} from './app.component';
 import {CadastroComponent} from './cadastro/cadastro.component';
@@ -18,7 +19,7 @@ import {routing} from './app.routes'; //
 
 //Decorator
 @NgModule({
-    imports: [ BrowserModule, FotoModule, PainelModule, HttpModule, routing, FormsModule, ReactiveFormsModule ],
+    imports: [ BrowserModule, FotoModule, PainelModule, HttpModule, routing, FormsModule, ReactiveFormsModule, BotaoModule ],
     declarations: [ AppComponent, CadastroComponent, ListagemComponent ],
     bootstrap: [ AppComponent ]
 })

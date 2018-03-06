@@ -30,6 +30,7 @@ export class ListagemComponent {
 
     //Methods
     remover(foto: FotoComponent): void {
+
         this.service
             .remover(foto)
             .subscribe(
