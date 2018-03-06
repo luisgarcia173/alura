@@ -2,6 +2,7 @@
 import {Component} from '@angular/core';
 import {FotoService} from '../foto/foto.service';
 import {FotoComponent} from '../foto/foto.component';
+import { PainelComponent } from '../painel/painel.component';
 
 //Decorator
 @Component({
@@ -29,17 +30,19 @@ export class ListagemComponent {
     }
 
     //Methods
-    remover(foto: FotoComponent): void {
+    remover(foto: FotoComponent, painel: PainelComponent): void {
 
         this.service
             .remover(foto)
             .subscribe(
                 () => {
-                    let novasFotos = this.fotos.slice(0);
-                    let indice = novasFotos.indexOf(foto);
-                    novasFotos.splice(indice, 1);
-                    this.fotos = novasFotos;
-                    this.mensagem = 'Foto removida com sucesso';
+                    painel.fadeOut(() => {
+                        let novasFotos = this.fotos.slice(0);
+                        let indice = novasFotos.indexOf(foto);
+                        novasFotos.splice(indice, 1);
+                        this.fotos = novasFotos;
+                        this.mensagem = 'Foto removida com sucesso';
+                    });
                 }, 
                 erro => {
                     console.log(erro);
