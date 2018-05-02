@@ -13,4 +13,5 @@ Workspace relacionado aos Cursos da ALURA onde foi necessário gerar alguma codi
 * [26/02/2018] - Angular 2 - Part I - [28/02/2018]
 * [05/03/2018] - Angular 2 - Part II - [05/03/2018]
 * [06/03/2018] - Webpack: Manipulando módulos na webapp - [06/03/2018]
-* [19/03/2018] - Javascript: De padrões a uma abordagem funcional - []
+* [19/03/2018] - Javascript: De padrões a uma abordagem funcional - [02/05/2018]
+* [02/05/2018] - Jasmine: Testes automatizados em JavaScript - []
