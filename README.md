@@ -15,3 +15,4 @@ Workspace relacionado aos Cursos da ALURA onde foi necessário gerar alguma codi
 * [06/03/2018] - Webpack: Manipulando módulos na webapp - [06/03/2018]
 * [19/03/2018] - Javascript: De padrões a uma abordagem funcional - [02/05/2018]
 * [02/05/2018] - Jasmine: Testes automatizados em JavaScript - [02/05/2018]
+* [03/05/2018] - Progressive Web App - []

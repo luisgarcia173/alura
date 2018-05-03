@@ -48,7 +48,7 @@ frontend/app/bower_components/
 *.orig
 frontend/api/
 /frontend/node_modules
-/node_modules
+*/node_modules
 
 #Idea Files#
 ####################
