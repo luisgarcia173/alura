@@ -45,6 +45,12 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - A diretiva *ngFor
 
 ## Chapter III
+- A consumir uma Web API através do serviço HttpClient
+- Injeção de dependência e a importância de providers
+- Isolamento do lógica de acesso à Web API em classe de serviço
+- Tipagem do retorno da API através de interface e sua vantagem
+- Componentes possuem ciclo de vida
+- A fase OnInit
 
 ## Chapter IV
 
