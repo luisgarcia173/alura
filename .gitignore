@@ -36,22 +36,14 @@
 ehthumbs.db
 Thumbs.db
 
-#Eclipse files#
+#IDE files#
 ######################
 *.project
 *.classpath
 *.settings
-tomcat.properties
-frontend/.sass-cache/
-frontend/report/
-frontend/app/bower_components/
 *.orig
-frontend/api/
-/frontend/node_modules
-*/node_modules
-
-#Idea Files#
-####################
+node_modules/
+.vscode
 *.iml
 .idea/
 target/
