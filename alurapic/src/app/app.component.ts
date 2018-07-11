@@ -8,6 +8,10 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'AluraPIC';
 
-  imgUrl = 'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/MissFortune_0.jpg';
-  imgTitle = 'Miss Fortune (ADC)';
+  photos = [
+    {url: 'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/MissFortune_0.jpg', description: 'Miss Fortune (ADC): Classic'},
+    {url: 'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/MissFortune_6.jpg', description: 'Miss Fortune (ADC): Mafia'},
+    {url: 'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/MissFortune_16.jpg', description: 'Miss Fortune (ADC): Ultimate'}
+  ];
+
 }
