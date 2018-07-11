@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  title = 'AluraPIC';
+
+  imgUrl = 'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/MissFortune_0.jpg';
+  imgTitle = 'Miss Fortune (ADC)';
 }
