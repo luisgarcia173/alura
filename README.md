@@ -1,11 +1,8 @@
-# [README] Cursos Alura - Javascript
+#Cursos Alura - Javascript  
+Workspace relacionado aos Cursos da `ALURA` onde foi necessário gerar alguma codificação.
+ 
+##CURSOS REALIZADOS:
 
-**DESCRIÇÃO:** Workspace relacionado aos Cursos da `ALURA` onde foi necessário gerar alguma codificação:
-
-- **Author:** Luis Garcia
-- **Desde:** 01/06/2016
-
-**CURSOS REALIZADOS:**
 |Dt Inicio|Nome do Curso|Instrutor|Codificação|Dt Fim|
 |---|---|---|---|---|
 |01/06/2017|Introdução ao Javascript|Douglas Quintanilha|*javascript*|05/06/2017
