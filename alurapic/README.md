@@ -62,6 +62,10 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - Parametrizando rotas e como obter valores do segmento parametrizado
 
 ## Chapter V
+- Novo componente para listar photos
+- Adequação dos dados recebidos pelo componente
+- Quando a fase OnInit não é suficiente
+- A interface OnChanges e como interagir com SimpleChanges
 
 ## Chapter VI
 
