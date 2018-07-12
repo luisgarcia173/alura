@@ -53,6 +53,13 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - A fase OnInit
 
 ## Chapter IV
+- BrowserModule vs CommonModule
+- Single Page Application e rotas no lado do navegador
+- O módulo RouterModule
+- A diretiva router-outlet como grande lacuna para exibição de outros componentes
+- Módulo de rotas e definição de rotas
+- Como lidar com 404
+- Parametrizando rotas e como obter valores do segmento parametrizado
 
 ## Chapter V
 
