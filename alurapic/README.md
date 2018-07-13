@@ -76,3 +76,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - LoadButton
 
 ## Chapter VII
+- Sub-módulos
+- Integração Font Awesome
+- Ng-Content
+- Output property
+- Diretiva customizada

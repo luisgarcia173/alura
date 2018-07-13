@@ -1,7 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
 
 import { Photo } from '../photo/photo';
 import { PhotoService } from '../photo/photo.service';
@@ -11,12 +9,11 @@ import { PhotoService } from '../photo/photo.service';
   templateUrl: './photo-list.component.html',
   styleUrls: ['./photo-list.component.css']
 })
-export class PhotoListComponent implements OnInit, OnDestroy {
+export class PhotoListComponent implements OnInit {
   
   // Atributos
   photos: Photo[] = [];
   filter: string = '';
-  debounce: Subject<string> = new Subject<string>();
 
   // Paginação
   hasMore: boolean = true;
@@ -33,13 +30,6 @@ export class PhotoListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.userName = this.activatedRoute.snapshot.params.userName;
     this.photos = this.activatedRoute.snapshot.data['photos'];
-    this.debounce
-      .pipe(debounceTime(300)) // idle for 3s
-      .subscribe(filter => this.filter = filter);
-  }
-  
-  ngOnDestroy(): void {
-    this.debounce.unsubscribe(); // Libera memoria ao acessar outra rota
   }
 
   load() {
@@ -47,6 +37,7 @@ export class PhotoListComponent implements OnInit, OnDestroy {
       .listFromUserByPage(this.userName, ++this.currentPage)
       .subscribe(photos => {
         //this.photos.push(...photos); // spread operator ... === []
+        this.filter = '';
         this.photos = this.photos.concat(photos); // força objeto ser atualizado (recebendo novo valor) atualiza Dom
         if (!photos.length) {
           this.hasMore = false;
