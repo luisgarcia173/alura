@@ -68,5 +68,11 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - A interface OnChanges e como interagir com SimpleChanges
 
 ## Chapter VI
+- Binding de eventos
+- Pipe e implementação
+- Resolver, como pre-load da rota
+- Usando Subscribe e Debounce
+- Paginação de dados
+- LoadButton
 
 ## Chapter VII
