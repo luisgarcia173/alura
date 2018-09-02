@@ -16,5 +16,5 @@ Workspace relacionado aos Cursos da `ALURA` onde foi necessário gerar alguma co
 |19/03/2018|Javascript: De padrões a uma abordagem funcional|Flavio Henrique|*javascript*|02/05/2018
 |02/05/2018|Jasmine: Testes automatizados em JavaScript|Mauricio Aniche|*jasmine*|02/05/2018
 |03/05/2018|Progressive Web App|Artur Adam|*javascript*|xxx
-|11/07/2018|Angular Fundamentos|Flavio Henrique|*angular cli*|xxx
+|11/07/2018|Angular Fundamentos|Flavio Henrique|*angular cli*|13/07/2018
 |xx/xx/xxxx|Angular Autenticacao, Forms e Lazy Loading|Flavio Henrique|*angular cli*|xxx
