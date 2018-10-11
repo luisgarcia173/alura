@@ -10,10 +10,11 @@ class UserDao {
         this._db = db;
     }
 
-    findByNameAndPassword(userName, password) {
+    findByNameAndPassword(username, password) {
+        console.log([username, password]);
         return new Promise((resolve, reject) => this._db.get(
             `SELECT * FROM user WHERE user_name = ? AND user_password = ?`,
-            [userName, password],
+            [username, password],
             (err, row) => {
                 if (err) {
                     console.log(err);

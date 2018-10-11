@@ -18,7 +18,7 @@ export class PhotoListComponent implements OnInit {
   // Paginação
   hasMore: boolean = true;
   currentPage: number = 1;
-  userName: string = ';'
+  userName: string = '';
   
   // Injeção de dependência
   constructor(
