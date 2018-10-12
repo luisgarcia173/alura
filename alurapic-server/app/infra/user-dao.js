@@ -58,8 +58,8 @@ class UserDao {
                 ) values (?,?,?,?,?)
             `,
                 [
-                    user.userName,
-                    user.fullName,
+                    user.username,
+                    user.fullname,
                     user.email, 
                     user.password, 
                     new Date()
@@ -69,7 +69,7 @@ class UserDao {
                         console.log(err);
                         return reject('Can`t register new user');
                     }
-                    console.log(`User ${user.userName} registered!`)
+                    console.log(`User ${user.username} registered!`)
                     resolve();
                 });
         });
