@@ -4,6 +4,7 @@ import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RequestInterceptorService } from './auth/request-interceptor.service';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   imports: [
@@ -11,10 +12,12 @@ import { RequestInterceptorService } from './auth/request-interceptor.service';
     RouterModule
   ],
   declarations: [
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ],
   providers: [ //Interceptador Token (subrescreve o default token)
     {
