@@ -14,7 +14,7 @@ export class LoginGuard implements CanActivate {
 
   // A better use of this resource is to protect user page, instead of sign in
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : boolean | Observable<boolean> | Promise<boolean> {
-    if (this.userService.isLoged()) {
+    if (this.userService.isLogged()) {
       this.router.navigate(['user', this.userService.getUsername()]);
       return false;
     }

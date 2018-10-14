@@ -28,8 +28,10 @@ export class PhotoListComponent implements OnInit {
   
   // Ciclo de vida (Inicialização e Configuração)
   ngOnInit(): void {
-    this.userName = this.activatedRoute.snapshot.params.userName;
-    this.photos = this.activatedRoute.snapshot.data['photos'];
+    this.activatedRoute.params.subscribe(params => { //Subscribe para observar mudança do parâmetro da rota
+      this.userName = params.userName;
+      this.photos = this.activatedRoute.snapshot.data['photos'];
+    })
   }
 
   load() {

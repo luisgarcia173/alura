@@ -1,8 +1,13 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Photo } from "./photo";
+import { map, catchError } from "rxjs/operators";
+import { throwError, of } from "rxjs";
 
-const API = 'http://localhost:3000';
+import { Photo } from "./photo";
+import { PhotoComment } from "../photo-details/photo-comments/photo-comment";
+import { environment } from "src/environments/environment";
+
+const API = environment.apiURL;
 
 @Injectable({
 	providedIn: 'root'
@@ -30,8 +35,29 @@ export class PhotoService {
     return this.http.post(API + '/photos/upload', formData);
   }
 
-  findById(id: string) {
-    return this.http.get<Photo>(API + '/photos/' + id);
-  }   
+  findById(photoId: number) {
+    return this.http.get<Photo>(API + '/photos/' + photoId);
+  }
+
+  getComments(photoId: number) {
+    return this.http.get<PhotoComment[]>(API + '/photos/' + photoId + '/comments');
+  }
+
+  addComment(photoId: number, commentText: string){
+    return this.http.post(API + '/photos/' + photoId + '/comments', { commentText });
+  }
+
+  removePhoto(photoId: number){
+    return this.http.delete(API + '/photos/' + photoId);
+  }
+
+  like(photoId: number) {
+    return this.http
+      .post(API + '/photos/' + photoId + '/like', {}, { observe: 'response'})
+      .pipe(map(res => true))
+      .pipe(catchError(err => {
+        return err.status === '304' ? of(false): throwError(err); // HTTP: 304 - Not Modified
+      }));
+  }
 
 }

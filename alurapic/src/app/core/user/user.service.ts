@@ -31,7 +31,7 @@ export class UserService {
     this.userSubject.next(null);
   }
 
-  isLoged() {
+  isLogged() {
     return this.tokenService.hasToken();
   }
 

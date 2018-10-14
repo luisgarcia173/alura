@@ -37,9 +37,13 @@ const routes: Routes = [
     component: PhotoDetailsComponent
   },
   { 
-    path: '**' , 
+    path: 'not-found' , 
     component: NotFoundComponent 
   },
+  { 
+    path: '**' , 
+    redirectTo: 'not-found' 
+  }
 ];
 
 @NgModule({
