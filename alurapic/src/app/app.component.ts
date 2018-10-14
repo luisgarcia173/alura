@@ -1,18 +1,30 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { Title } from '@angular/platform-browser';
+import { filter, map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'ap-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  // mock sem uso neste momento
-  photosMock = [
-    {url: 'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/MissFortune_0.jpg', description: 'Miss Fortune (ADC): Classic'},
-    {url: 'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/MissFortune_6.jpg', description: 'Miss Fortune (ADC): Mafia'},
-    {url: 'https://ddragon.leagueoflegends.com/cdn/img/champion/splash/MissFortune_16.jpg', description: 'Miss Fortune (ADC): Ultimate'}
-  ];
+export class AppComponent implements OnInit {
 
-  title = 'AluraPIC';
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private titleService: Title
+  ) { }
 
+  ngOnInit(): void {
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .pipe(map(() => this.activatedRoute))
+      .pipe(map(route => {
+        while(route.firstChild) route = route.firstChild;
+        return route;
+      }))
+      .pipe(switchMap(route => route.data))
+      .subscribe(event => this.titleService.setTitle(event.title));
+  }
 }
