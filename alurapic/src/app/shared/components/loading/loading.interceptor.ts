@@ -1,7 +1,17 @@
 import { Injectable } from "@angular/core";
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpSentEvent, HttpHeaderResponse, HttpProgressEvent, HttpResponse, HttpUserEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from "rxjs/operators";
+import { 
+  HttpInterceptor, 
+  HttpRequest, 
+  HttpHandler, 
+  HttpSentEvent, 
+  HttpHeaderResponse, 
+  HttpProgressEvent, 
+  HttpResponse, 
+  HttpUserEvent, 
+  HttpErrorResponse 
+} from '@angular/common/http';
 
 import { LoadingService } from "./loading.service";
 
@@ -17,13 +27,20 @@ export class LoadingInterceptor implements HttpInterceptor {
 
     return next
       .handle(req)
-      .pipe(tap(event => {
-        if (event instanceof HttpResponse) {
-          this.loadingService.stop();
-        } else {
-          this.loadingService.start();
+      .pipe(tap(
+        event => {
+          if (event instanceof HttpResponse) {
+            this.loadingService.stop();
+          } else {
+            this.loadingService.start();
+          }
+        },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            this.loadingService.stop();
+          }
         }
-      }));
+      ));
   }
 
 }

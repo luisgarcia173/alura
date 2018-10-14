@@ -3,16 +3,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { lowerCaseValidator } from 'src/app/shared/validators/lower-case.validator';
-import { UserNotTakenValidatorService } from './user-not-taken.validator.service';
+import { UserNotTakenValidator } from './user-not-taken.validator';
 import { NewUser } from './new-user';
 import { SignupService } from './signup.service';
 import { PlatformDetectorService } from 'src/app/core/platform-detector/platform-detector.service';
+import { usernamePassword } from './username-password.validator';
 
 @Component({
   selector: 'ap-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
-  providers: [ UserNotTakenValidatorService ]
+  providers: [ UserNotTakenValidator ]
 })
 export class SignupComponent implements OnInit {
 
@@ -21,9 +22,9 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private userNotTakenValidatorService: UserNotTakenValidatorService,
     private signupService: SignupService,
     private platformService: PlatformDetectorService,
+    private userNotTakenValidator: UserNotTakenValidator,
     private router: Router) { }
 
   ngOnInit() {
@@ -41,7 +42,7 @@ export class SignupComponent implements OnInit {
           Validators.minLength(2),
           Validators.maxLength(30)
         ],
-        this.userNotTakenValidatorService.checkUsernameTaken() // 2 - async validators
+        this.userNotTakenValidator.checkUsernameTaken() // 2 - async validators
       ],
       fullname: ['', 
         [
@@ -57,11 +58,15 @@ export class SignupComponent implements OnInit {
           Validators.maxLength(14)
         ]
       ]
+    },
+    {
+      validator: usernamePassword
     });
     this.platformService.isPlatformBrowser() && this.emailInput.nativeElement.focus();
   }
 
   signup() {
+    //if (this.signupForm.valid && !this.signupForm.pending) // 
     const newUser = this.signupForm.getRawValue() as NewUser;
     this.signupService
       .signup(newUser)

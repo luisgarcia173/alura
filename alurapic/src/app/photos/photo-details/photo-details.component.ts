@@ -41,7 +41,7 @@ export class PhotoDetailsComponent implements OnInit {
       .subscribe(
         () => {
           this.alertService.success('Photo removed', true);
-          this.router.navigate(['/user', this.userService.getUsername()]);
+          this.router.navigate(['/user', this.userService.getUsername()], { replaceUrl: true }); // removendo rota da history
         },
         err => {
           console.log(err);
